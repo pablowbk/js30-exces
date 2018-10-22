@@ -5,175 +5,110 @@
     font-style: normal;
 }
 
-
 * {
   box-sizing: border-box;
 }
 
-body, html {
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-}
-
-html {
-  background: /*url(https://picsum.photos/1500/1000?random) */
-  #018DED;
-  background-size: cover;
-  text-align: center;
-}
-
-body {
   display: flex;
   flex: 1;
   min-height: 100vh;
   align-items: center;
-  background-color: rgba(255, 0, 0, 0.1);
+  background: linear-gradient(to right, #68a4e3, #2d9aff);
 }
 
 .clock {
-  border: 20px solid white;
-  border-radius: 50%;
   position: relative;
-  height: 20rem;
-  width: 20rem;
-  margin: 50px auto;
-  padding: 10px;
-  box-shadow:
-    inset 0.05em -0.05em 0 #ccc, /*ccc*/
-    inset 0.17em -0.17em 0 #333,
-    inset -0.03em -0.04em 0 #999, /*999*/
-    inset -0.03em 0.02em 0 #ccc, /*ccc*/
-    inset -0.1em -0.1em 0 #333,
-    0.1em 0.3em 0.2em rgba(0, 0, 0, 0.3);
+  margin: auto;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  border: 20px solid black;
 }
 
 .clock-face {
-  position: relative;
+  position: absolute;
+  background-color: white;
+  margin: auto;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  box-shadow: inset 0 0 30px 5px rgba(0, 0, 0, 0.2);
-
 }
 
-
-.center {
-  width: 10%;
-  height: 10%;
-  border-radius: 50%;
-  background: black;
-  margin: auto;
-  position: relative;
+.clock-face::after {
+  content: "";
+  border: 1px solid blue;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 9;
-
-}
-
-.hand {
+  width: 100%;
   position: absolute;
-  width: 50%;
-  height: 6px;
-  background: black;
-  top: 50%;
-  transform-origin: 100%;
-  transform: translateY(-3px);
-  transition: transform 0.05s transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  /* visibility: hidden; */
+  opacity: .5;
 }
 
-
-.hour-hand {
-  top: 50%;
-  width: 35%;
-  left: 15%;
-  height: 10px;
-  transform: translateY(-5px) rotate(180deg);
-  background-color: #FFF;
-  border: 3px solid #000;
-  z-index: 9;
-}
-
-
-.min-hand {
-  width: 45%;
-  left: 5%;
-  height: 7px;
-  transform: translateY(-3.5px) rotate(270deg);
-  opacity: .8;
-  z-index: 9;
-}
-
-
-.second-hand {
-  height: 4px;
-  background: red;
-  z-index: 9;
-  transform: translateY(-2px) rotate(270deg);
-}
-
-.center-red {
-  position: absolute;
-  width: 5%;
-  height: 5%;
-  border-radius: 50%;
-  background: red;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  z-index: 10;
-
-}
-
-
-.hour {
-  display: block;
-  position: absolute;
+.clock-face::before {
+  content: "";
+  border: 1px solid blue;
   height: 100%;
-  width: 12.5%;
-  color: white;
-  font-size: 2em;
-  font-family: WallClock;
-  top: 50%;
   left: 50%;
-  /* visibility: hidden; */
+  position: absolute;
+  opacity: .5;
 }
 
-.twelve {
-  transform: translate(-50%, -50%) rotateZ(0deg);
+.hands {
+  border: 2px solid red;
+  position: relative;
+  width: 85%;
+  height: 85%;
+  margin: auto;
+  top: 7.5%;
+  border-radius: 50%;
 }
 
-.twelve div {
+.hand-hour {
+  position: absolute;
+  width: 35%;
+  height: 20px;
+  background: black;
+  top: 50%;
+  left: 15%;
+  transform-origin: 100%;
+  transform: rotate(180deg);
+  transform: translateY(-10px);
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+
+
 
 }
 
-.nine {
-  transform: translate(-50%, -50%) rotateZ(270deg);
+.hand-min {
+
 }
 
-.nine div {
-  transform: rotate(90deg)
+.hand-secs {
+
 }
 
-.six {
-  transform: translate(-50%, -50%) rotateZ(180deg);
-}
-
-.six div {
-  transform: rotate(180deg)
-}
-
-.three {
-  transform: translate(-50%, -50%) rotateZ(90deg);
-}
-
-.three div {
-  transform: rotate(270deg)
-}
-
-.displayedHands {
-  visibility: visible;
+.hours {
+  visibility: hidden;
+  border: 2px solid orange;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: 0;
+  border-radius: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  align-items: center;
+  text-align: center;
+  font-size: 4em;
+  font-family: WallClock;
 }
