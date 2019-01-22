@@ -9,7 +9,7 @@
 
     html {
       font-family: sans-serif;
-      background: #ffc600;
+      background: #8fb898;
     }
 
     .inbox {
@@ -30,8 +30,12 @@
       border-bottom: 0;
     }
 
+    .item:hover {
+      background: #F8F8F8;
+    }
+
     input:checked + p {
-      background: #F9F9F9;
+      background: #F8F8F8;
       text-decoration: line-through;
     }
 
@@ -44,11 +48,39 @@
       padding: 20px;
       transition: background 0.2s;
       flex: 1;
-      font-family:'helvetica neue';
+      font-family: sans-serif;
       font-size: 20px;
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
     }
+
+    .buttons {
+      margin: 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .clear-all, .check-all {
+      border: none;
+      padding: 10px 20px;
+      margin: 0 25px;
+      /* flex: 1; */
+      font-family: sans-serif;
+      font-size: 16px;
+      font-weight: 200;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+      transition: all 100ms ease-in;
+    }
+
+    button:hover {
+      cursor: pointer;
+      color: white;
+      background: rgb(63, 139, 84);
+    }
+
   </style>
    <!--
    The following is a common layout you would see in an email client.
@@ -94,9 +126,15 @@
       <p>Don't forget to tweet your result!</p>
     </div>
   </div>
+  <div class="buttons">
+    <button class="check-all">Check All</button>
+    <button class="clear-all">Clear All</button>
+  </div>
 
 <script>
 const checkboxes = [...document.querySelectorAll('input[type=checkbox]')]
+const checkAll = document.querySelector('.check-all');
+const clearAll = document.querySelector('.clear-all');
 
 let lastChecked;
 
@@ -119,9 +157,28 @@ function handleCheck(e) {
   }
   lastChecked = this;
 }
-checkboxes.forEach(checkbox => {
-  checkbox.addEventListener('click', handleCheck)
-});
+
+function checkAllClick(e) {
+  e.preventDefault();
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = true;
+  })
+  console.log('all checked!!')
+}
+
+function clearAllClick(e) {
+  e.preventDefault();
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = false;
+  })
+  console.log('all cleared!!')
+}
+
+checkboxes.forEach(checkbox => { checkbox.addEventListener('click', handleCheck) });
+checkAll.addEventListener('click', checkAllClick)
+clearAll.addEventListener('click', clearAllClick)
+
+
 </script>
 </body>
 </html>

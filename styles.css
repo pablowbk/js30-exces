@@ -1,0 +1,55 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h2 {
+  text-align: center;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0 10px;
+
+}
+
+.list li {
+  margin: 5px auto;
+  padding: 5px 10px;
+  padding-right: 30px;
+}
+
+.list li:hover {
+  border-left: 2px solid green;
+  font-weight: 600;
+}
+
+footer {
+  padding: 10px;
+}
+
+footer a{
+  background: #ffc600;
+  padding: 2px 5px;
+  transition: all 100ms ease-in;
+}
+
+footer a:hover {
+  padding-right: 10px;
+  font-weight: 800;
+}
