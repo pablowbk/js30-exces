@@ -160,17 +160,13 @@ function handleCheck(e) {
 
 function checkAllClick(e) {
   e.preventDefault();
-  checkboxes.forEach(checkbox => {
-    checkbox.checked = true;
-  })
+  checkboxes.forEach(checkbox => { checkbox.checked = true })
   console.log('all checked!!')
 }
 
 function clearAllClick(e) {
   e.preventDefault();
-  checkboxes.forEach(checkbox => {
-    checkbox.checked = false;
-  })
+  checkboxes.forEach(checkbox => { checkbox.checked = false })
   console.log('all cleared!!')
 }
 
