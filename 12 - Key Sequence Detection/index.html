@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+  <style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: monospace;
+  }
+
+  /* h3 {
+    text-transform: uppercase;
+  } */
+
+  footer {
+    position: absolute;
+    bottom: 5%;
+  }
+
+  #link {
+    font-family: sans-serif;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    text-align: center;
+    color: inherit;
+    display: none;
+    transition: all 100ms ease;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  #link:hover {
+    transform: translateY(-10px);
+  }
+
+  </style>
+</head>
+<body>
+  <h3>enter konami</h3>
+  <footer><a id='link' href="https://www.twitter.com/wbkpablo">follow me</a></footer>
+<script>
+
+const body = document.querySelector('body');
+const h3 = document.querySelector('h3');
+const link = document.querySelector('#link');
+const pressed = [];
+const secretCode = "konami";
+
+function setGradient() {
+  body.style.background = "linear-gradient(to right, " + getRandom() + ", " + getRandom() + ")";
+  h3.textContent = 'UUDDRLRLBA lives on!';
+  h3.style.color = `${getRandom()}`;
+  link.style.background = `${getRandom()}`;
+  link.style.color = `${getRandom()}`;
+  link.style.display = 'block';
+  link.textContent = 'follow me'
+};
+
+function getRandom() {
+  return '#' + (function co(lor) {
+		return (lor +=
+			[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'][Math.floor(Math.random() * 16)])
+			&& (lor.length == 6) ? lor : co(lor);
+	})('');
+  //return "#"+ Math.floor(Math.random()*16777215).toString(16); //did not work, would return 000000 often
+};
+
+window.addEventListener('keyup', (e) => {
+  pressed.push(e.key);
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+  if(pressed.join('').includes(secretCode)) {
+    setGradient();
+  }
+
+
+  console.log(pressed);
+
+});
+
+
+</script>
+</body>
+</html>
