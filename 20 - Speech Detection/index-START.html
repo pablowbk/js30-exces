@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection</title>
+</head>
+
+<body>
+
+  <div class="btn-container">
+    <button id="btn-start" class="btn start">Open Mic</button>
+    <button id="btn-stop" class="btn stop">Stop Mic</button>
+  </div>
+
+  <div class="words" contenteditable>
+  </div>
+
+
+
+  <script>
+    // check for availability
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    // initial set up
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+    recognition.maxAlternatives = 1;
+
+    // grab dom elements
+    const startBtn = document.querySelector('#btn-start');
+    const stopBtn = document.querySelector('#btn-stop');
+
+    let p = document.createElement('p');
+
+    const words = document.querySelector('.words');
+    words.appendChild(p);
+
+    //
+    recognition.addEventListener('result', (e) => {
+      const transcript = Array.from(e.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+
+      p.textContent = transcript;
+      if (e.results[0].isFinal) {
+        p = document.createElement('p');
+        words.appendChild(p);
+      }
+      //console.log(transcript);
+    });
+
+    recognition.addEventListener('end', recognition.start);
+
+    const startRecording = (e) => recognition.start();
+    const stopRecording = (e) => recognition.stop();
+
+    startBtn.addEventListener('click', startRecording);
+    stopBtn.addEventListener('click', stopRecording);
+
+
+    //CONSOLE LOGGING EVENTS
+    recognition.onstart = function() {
+      console.log('Speech recognition service has started');
+    };
+    recognition.onend = function() {
+      console.log('Speech recognition service disconnected');
+    };
+
+
+    // ERROR HANDLING
+    recognition.onerror = function(event) {
+      console.error(event);
+    };
+  </script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+
+    .btn-container {
+      margin: 50px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      margin: 0 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+
+      border-radius: 20px;
+      transition: transform 200ms ease;
+    }
+
+    .btn:active {
+      transform: scale(.95);
+    }
+
+    .btn:focus,
+    .btn:hover {
+      cursor: pointer;
+    }
+
+    .start:active {
+      background-color: red;
+      color: #fff;
+    }
+
+    .stop:active {
+      background-color: #000;
+      color: #fff;
+    }
+  </style>
+
+</body>
+
+</html>
