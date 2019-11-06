@@ -38,15 +38,26 @@
     </ul>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
-      <input type="submit" value="+ Add Item">
+      <button type="submit">+ Add Item</button>
     </form>
+    <div class="more-options">
+      <button class="check">Check all</button>
+      <button class="uncheck">Un-check All</button>
+      <button class="delete">Delete All</button>
+    </div>
   </div>
 
   <script>
+    // DOM Elements
     const addItems = document.querySelector('.add-items');
     const itemsList = document.querySelector('.plates');
     const items = JSON.parse(localStorage.getItem('orders')) || []; // on page load, check for localStorage data, if none, use empty array
+    // buttons
+    const checkBtn = document.querySelector('.check');
+    const uncheckBtn = document.querySelector('.uncheck');
+    const deleteBtn = document.querySelector('.delete');
 
+    // Add Item function on Form Submit
     function addItem(event) {
       event.preventDefault();
 
@@ -61,8 +72,6 @@
       populateList(items, itemsList);
       localStorage.setItem('orders', JSON.stringify(items));
       this.reset(); // clears the input 
-
-      console.table(items);
     }
 
     function populateList(plates = [], platesList) {
@@ -92,6 +101,40 @@
     populateList(items, itemsList); // call localStorage data
 
     // create DELETE ALL, CHECK ALL, UNCHECK ALL buttns
+    
+    function checkAll() {
+      for (let i = 0; i < items.length; i++) {
+        items[i].done = true;
+      }
+      localStorage.setItem('orders', JSON.stringify(items));
+      populateList(items, itemsList);
+    }
+
+
+    function uncheckAll() {
+      for (let i = 0; i < items.length; i++) {
+        items[i].done = false;
+      }
+      localStorage.setItem('orders', JSON.stringify(items));
+      populateList(items, itemsList);
+    }
+
+    function deleteAll() {
+      items.length = 0;
+      // localStorage.removeItem('orders');
+      localStorage.clear()
+      populateList(items, itemsList);
+    }
+
+
+
+    // Event listeners for footer buttons
+    checkBtn.addEventListener('click', checkAll);
+    uncheckBtn.addEventListener('click', uncheckAll);
+    deleteBtn.addEventListener('click', deleteAll);
+
+
+
 
   </script>
 

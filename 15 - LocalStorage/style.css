@@ -7,7 +7,8 @@ html {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  /* font-family: Futura, "Trebuchet MS", Arial, sans-serif; */
+  font-family: sans-serif;
 }
 
 *,
@@ -76,6 +77,64 @@ h2 {
 
 .add-items input {
   padding: 10px;
-  outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  outline-color: darkorange;
+}
+
+button[type="submit"] {
+  cursor: pointer;
+  padding: 10px;
+  outline-color: darkorange;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-in;
+}
+
+button[type="submit"]:hover {
+  background: #333;
+  color: #fff;
+}
+
+.more-options {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.more-options button {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-in;
+}
+
+.more-options button + button {
+  margin-left: 5px;
+}
+
+.check {
+  outline-color: rgb(0, 102, 9);
+}
+
+.check:hover {
+  outline-color: rgb(0, 102, 9);
+  box-shadow: 0 0 5px 0px rgb(0, 102, 9);
+}
+
+.uncheck {
+  outline-color: #333;
+}
+
+.uncheck:hover {
+  outline-color: #333;
+  box-shadow: 0 0 5px 0px #333;
+}
+
+.delete {
+  outline-color: rgb(220, 20, 60);
+}
+
+.delete:hover {
+  outline-color: rgb(220, 20, 60);
+  box-shadow: 0 0 5px 0px rgb(220, 20, 60);
 }
