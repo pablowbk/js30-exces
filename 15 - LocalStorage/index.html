@@ -70,7 +70,7 @@
 
       items.push(item); // adds the new item into the items array
       populateList(items, itemsList);
-      localStorage.setItem('orders', JSON.stringify(items));
+      localStorage.setItem('orderedItems', JSON.stringify(items));
       this.reset(); // clears the input 
     }
 
@@ -90,7 +90,7 @@
       const el = e.target;
       const index = el.dataset.index;
       items[index].done = !items[index].done;
-      localStorage.setItem('orders', JSON.stringify(items));
+      localStorage.setItem('orderedItems', JSON.stringify(items));
       populateList(items, itemsList);
     }
 
@@ -106,7 +106,7 @@
       for (let i = 0; i < items.length; i++) {
         items[i].done = true;
       }
-      localStorage.setItem('orders', JSON.stringify(items));
+      localStorage.setItem('orderedItems', JSON.stringify(items));
       populateList(items, itemsList);
     }
 
@@ -115,13 +115,12 @@
       for (let i = 0; i < items.length; i++) {
         items[i].done = false;
       }
-      localStorage.setItem('orders', JSON.stringify(items));
+      localStorage.setItem('orderedItems', JSON.stringify(items));
       populateList(items, itemsList);
     }
 
     function deleteAll() {
       items.length = 0;
-      // localStorage.removeItem('orders');
       localStorage.clear()
       populateList(items, itemsList);
     }
