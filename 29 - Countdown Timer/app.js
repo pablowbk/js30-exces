@@ -35,8 +35,9 @@ function displayEndTime(timestamp) {
   const end = new Date(timestamp);
   const hours = end.getHours();
   const minutes = end.getMinutes();
+  const pod = hours >= 12 ? "pm" : "am";
 
-  endTime.textContent = `Be back at ${hours > 12 ? hours - 12 : hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+  endTime.textContent = `Be back at ${hours > 12 ? hours - 12 : hours}:${minutes < 10 ? '0' : ''}${minutes} ${pod.toUpperCase()}`;
 }
 
 function startTimer() {
