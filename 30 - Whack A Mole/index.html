@@ -61,7 +61,7 @@
     }
 
     function showMole() {
-      const time = randomTime(250, 2000); //miliseconds
+      const time = randomTime(250, 1200); //miliseconds
       const hole = randomHole(holes);
       hole.classList.add('up');
       setTimeout(() => {
@@ -75,9 +75,11 @@
       timeUp = false;
       score = 0;
       showMole()
+      gameStatus.classList.remove('over')
       gameStatus.textContent = "Whack'em!";
       setTimeout(() => {
         timeUp = true;
+        gameStatus.classList.add('over')
         gameStatus.textContent = "Time's Up!";
       }, 10000);
     }
@@ -86,11 +88,11 @@
       console.log('whacked!!')
       if (!e.isTrusted) return //avoids fake clicks being triggered;
       score++;
-      this.classList.remove('up');
+      this.parentNode.classList.remove('up');
       scoreBoard.textContent = score;
     }
 
-    moles.forEach(mole => mole.addEventListener('click', whack))
+    moles.forEach(mole => mole.addEventListener('click', whack));
 
   </script>
 </body>
